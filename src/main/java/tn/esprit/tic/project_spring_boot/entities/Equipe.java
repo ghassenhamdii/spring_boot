@@ -1,12 +1,13 @@
 package tn.esprit.tic.project_spring_boot.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Equipe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipe;
 
     private String libelle;
@@ -14,4 +15,14 @@ public class Equipe {
     private Integer nbPointsTotal;
 
     private Integer classementGeneral;
+
+
+    @OneToMany(mappedBy = "equipe")
+    private List<Pilote> pilotes;
+
+
+    @OneToMany(mappedBy = "equipe")
+    private List<Contrat> contrats;
+
+
 }

@@ -1,12 +1,13 @@
 package tn.esprit.tic.project_spring_boot.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Pilote {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPilote;
 
     private String libelleP;
@@ -14,4 +15,15 @@ public class Pilote {
     private Integer nbPointsTotal;
 
     private Integer classementGeneral;
+
+
+    @ManyToOne
+    @JoinColumn(name = "equipe_id")
+    private Equipe equipe;
+
+
+    @OneToMany(mappedBy = "pilote", cascade = CascadeType.ALL)
+    private List<Position> positions;
+
+
 }

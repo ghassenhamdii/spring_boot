@@ -1,12 +1,13 @@
 package tn.esprit.tic.project_spring_boot.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Sponsor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSponsor;
 
     private String nom;
@@ -16,4 +17,9 @@ public class Sponsor {
     private Float budgetAnnuel;
 
     private Boolean bloquerContrat;
+
+
+    @OneToMany(mappedBy = "sponsor")
+    private List<Contrat> contrats;
+
 }
