@@ -1,25 +1,29 @@
 package tn.esprit.tic.project_spring_boot.entities;
 
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Sponsor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSponsor;
 
-    private String nom;
+    private String nomSponsor;
+    private String adresse;
+    private Float budget;
 
-    private String pays;
+    private LocalDate dateCreation;
+    private LocalDate dateDerniereModification;
 
-    private Float budgetAnnuel;
-
+    private Boolean archived;
     private Boolean bloquerContrat;
-
-
-    @OneToMany(mappedBy = "sponsor")
-    private List<Contrat> contrats;
-
 }
