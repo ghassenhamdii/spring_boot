@@ -1,18 +1,19 @@
-package tn.esprit.tic.project_spring_boot.Service;
+package tn.esprit.tic.project_spring_boot.service;
 
-
-import tn.esprit.tic.project_spring_boot.Repository.SponsorRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import tn.esprit.tic.project_spring_boot.repository.SponsorRepository;
 import tn.esprit.tic.project_spring_boot.entities.Sponsor;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
+@AllArgsConstructor
+public class SponsorService implements ISponsorService {
 
-public class SponsorServiceImpl implements ISponsorService {
+    private SponsorRepository sponsorRepository;
 
-    SponsorRepository sponsorRepository;
-
-    // CREATE 1
     @Override
     public Sponsor ajouterSponsor(Sponsor sponsor) {
         sponsor.setDateCreation(LocalDate.now());
@@ -21,7 +22,6 @@ public class SponsorServiceImpl implements ISponsorService {
         return sponsorRepository.save(sponsor);
     }
 
-    // CREATE LIST
     @Override
     public List<Sponsor> ajouterSponsors(List<Sponsor> sponsors) {
 
@@ -34,32 +34,27 @@ public class SponsorServiceImpl implements ISponsorService {
         return sponsorRepository.saveAll(sponsors);
     }
 
-    // UPDATE
     @Override
     public Sponsor modifierSponsor(Sponsor sponsor) {
         sponsor.setDateDerniereModification(LocalDate.now());
         return sponsorRepository.save(sponsor);
     }
 
-    // DELETE
     @Override
     public void supprimerSponsor(Long idSponsor) {
         sponsorRepository.deleteById(idSponsor);
     }
 
-    // READ ALL
     @Override
     public List<Sponsor> listSponsors() {
         return sponsorRepository.findAll();
     }
 
-    // READ ONE
     @Override
     public Sponsor recupererSponsor(Long idSponsor) {
         return sponsorRepository.findById(idSponsor).orElse(null);
     }
 
-    // ARCHIVE
     @Override
     public Boolean archiverSponsor(Long idSponsor) {
         Sponsor s = sponsorRepository.findById(idSponsor).orElse(null);
