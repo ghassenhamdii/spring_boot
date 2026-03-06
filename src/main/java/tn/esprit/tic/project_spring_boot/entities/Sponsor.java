@@ -4,26 +4,30 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Sponsor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSponsor;
 
-    private String nomSponsor;
-    private String adresse;
-    private Float budget;
+    private String nom;
 
-    private LocalDate dateCreation;
-    private LocalDate dateDerniereModification;
+    private String pays;
 
-    private Boolean archived;
+    private Float budgetAnnuel;
+
     private Boolean bloquerContrat;
+    Boolean archived;
+    LocalDate dateCreation;
+    LocalDate dateDerniereModification;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="sponsor")
+    private List<Contrat> contrats;
 }

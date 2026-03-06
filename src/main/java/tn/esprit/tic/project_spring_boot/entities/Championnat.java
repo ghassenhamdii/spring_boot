@@ -3,6 +3,9 @@ package tn.esprit.tic.project_spring_boot.entities;
 import jakarta.persistence.*;
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Championnat {
 
@@ -17,14 +20,8 @@ public class Championnat {
 
     private Integer annee;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "detail_id")
     private DetailChampionnat detailChampionnat;
-
-
-    @OneToMany(mappedBy = "championnat", cascade = CascadeType.ALL)
-    private List<Course> courses;
-
 
 }
